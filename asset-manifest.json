@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/tool/static/css/main.c3891dc5.chunk.css",
+    "main.js": "/tool/static/js/main.9279cc08.chunk.js",
+    "main.js.map": "/tool/static/js/main.9279cc08.chunk.js.map",
+    "runtime-main.js": "/tool/static/js/runtime-main.4bd8c82c.js",
+    "runtime-main.js.map": "/tool/static/js/runtime-main.4bd8c82c.js.map",
+    "static/js/2.b83cda71.chunk.js": "/tool/static/js/2.b83cda71.chunk.js",
+    "static/js/2.b83cda71.chunk.js.map": "/tool/static/js/2.b83cda71.chunk.js.map",
+    "static/js/3.f84681e6.chunk.js": "/tool/static/js/3.f84681e6.chunk.js",
+    "static/js/3.f84681e6.chunk.js.map": "/tool/static/js/3.f84681e6.chunk.js.map",
+    "index.html": "/tool/index.html",
+    "static/css/main.c3891dc5.chunk.css.map": "/tool/static/css/main.c3891dc5.chunk.css.map",
+    "static/js/2.b83cda71.chunk.js.LICENSE.txt": "/tool/static/js/2.b83cda71.chunk.js.LICENSE.txt",
+    "static/media/bylogo.09ee496c.svg": "/tool/static/media/bylogo.09ee496c.svg",
+    "static/media/crop.e6a1a5f9.png": "/tool/static/media/crop.e6a1a5f9.png",
+    "static/media/dollar_sign.80a99e25.png": "/tool/static/media/dollar_sign.80a99e25.png",
+    "static/media/drop.2faf5a23.png": "/tool/static/media/drop.2faf5a23.png",
+    "static/media/irrigation.ee0b139e.png": "/tool/static/media/irrigation.ee0b139e.png",
+    "static/media/soil.89405dd3.png": "/tool/static/media/soil.89405dd3.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4bd8c82c.js",
+    "static/js/2.b83cda71.chunk.js",
+    "static/css/main.c3891dc5.chunk.css",
+    "static/js/main.9279cc08.chunk.js"
+  ]
+}
