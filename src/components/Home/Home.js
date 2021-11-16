@@ -260,7 +260,7 @@ function Home() {
           ecw=1.1;
           ETm=600;
         }
-        lr = eci/((5*ecw) - eci)
+        lr = ecw/((5*eci) - ecw)
         iw= ETm/(ie)*(1-lr)
         setc(lr)
         setd(iw)
