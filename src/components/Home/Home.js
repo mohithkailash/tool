@@ -68,8 +68,9 @@ function Home() {
        const [b,setb] = useState('');
        const [c,setc] = useState('');
        const [d,setd] = useState('');
+       const [wec,setwec] = useState(null);
        const [Eta,seteta] = useState(0);
-       const [ie, setie] = useState(0);
+       const [ie, setie] = useState(100);
        function cpot(){
            //console.log(pa)
            let Ym =0;
@@ -202,68 +203,68 @@ function Home() {
         let iw =0;
         if (pa == 1){
             eci = 2;
-            ecw = 1.3;
+            ecw = wec ?? 1.3;
             ETm=1500;
            }
         else if ( pa == 2){
            eci=7;
-           ecw=4.7;
+           ecw= wec ?? 4.7;
            ETm=1050;
         }
         else if (pa == 3){
            eci=6;
-           ecw=4;
+           ecw= wec ?? 4;
            ETm=620;
         }
         else if (pa == 4){
            eci=6.9;
-           ecw=4.6;
+           ecw= wec ?? 4.6;
            ETm=1200;
         }
         else if (pa ==5 ){
            eci=4;
-           ecw=2.7;
+           ecw= wec ?? 2.7;
            ETm=1250;
         }
         else if (pa == 6){
            eci=2.8;
-           ecw=1.9;
+           ecw= wec ?? 1.9;
            ETm=800;
         }
         else if (pa ==7 ){
             eci=1.3;
-            ecw=1;
+            ecw= wec ?? 1;
             ETm=320;
         }
         else if (pa == 8){
           eci=1;
-          ecw=0.8;
+          ecw= wec ?? 0.8;
           ETm=600;
         }
         else if (pa == 9){
            eci=2.8;
-           ecw=1.9;
+           ecw= wec ?? 1.9;
            ETm=350;
         }
         else if (pa == 10){
           eci=1.2;
-          ecw=0.9;
+          ecw= wec ?? 0.9;
           ETm=800;
         }
         else if (pa ==11 ){
            eci=2;
-           ecw=1.3;
+           ecw= wec ?? 1.3;
            ETm=200;
         }
         else if (pa ==12 ){
           eci=1.7;
-          ecw=1.1;
+          ecw= wec ?? 1.1;
           ETm=600;
         }
         lr = ecw/((5*eci) - ecw)
-        iw= ETm/(ie)*(1-lr)
-        setc(lr)
-        setd(iw)
+        iw= (ETm * 100)/((ie)*(1-lr))
+        setc((lr*100).toFixed(2))
+        setd(iw.toFixed(2))
        }
        function LinearProgressWithLabel(props) {
             return (
@@ -332,7 +333,7 @@ function Home() {
                         </p> 
                         <p><form>
                         <label>Water EC (dS/m):{' '}
-                        <input type="number" placeholder = "(dS/m)" style={{width: "50px"}}/>
+                        <input type="number" placeholder = "(dS/m)" style={{width: "55px"}} onChange = {e => setwec(e.target.value)}/>
                         </label>
                     </form></p>
                     </div>
@@ -393,7 +394,7 @@ function Home() {
                         </form></p>
                         </div>
                         
-                            </div>
+                        </div>
                     </div>
 
                     <div className="sep">
@@ -424,7 +425,7 @@ function Home() {
                             <h6>For accurate results, Enter crop type, Cumulative ET and Irrigation Efficiency</h6>
                             {pa.myPaVal}
                             <button className="gooey-button" onClick = {clr}>Calculate</button>
-                            <h4>Leaching Requirement: {c}</h4>
+                            <h4>Leaching Requirement: {c} %</h4>
                             <h4>Irrigation Water depth: {d}</h4>
                         </div>
                     </div> 
