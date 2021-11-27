@@ -202,6 +202,7 @@ function Home() {
        function clr(){
         if (pa === 0){
             alert("Please enter crop type")
+            return
         }
         let eci =0;
         let ecw =0;
@@ -289,6 +290,7 @@ function Home() {
         function cald(){
             if (pa == 0){
                 alert("Please enter crop type")
+                return
             }
             let Etm=0;
             if (pa == 1){
