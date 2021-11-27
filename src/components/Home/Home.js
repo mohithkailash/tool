@@ -13,7 +13,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-import { CenterFocusStrong, SettingsSystemDaydream } from '@material-ui/icons';
+
 const itype = [
   { label: "Flood  ", value:  1},
   { label: "Basin  ", value: 2 },
@@ -68,6 +68,9 @@ function Home() {
        const [b,setb] = useState('');
        const [c,setc] = useState('');
        const [d,setd] = useState('');
+       let [d1,setd1] = useState('');
+       let [d2,setd2] = useState('');
+       let [d3,setd3] = useState('');
        const [wec,setwec] = useState(null);
        const [Eta,seteta] = useState(0);
        const [ie, setie] = useState(100);
@@ -197,6 +200,9 @@ function Home() {
            setb(pr)
        }
        function clr(){
+        if (pa === 0){
+            alert("Please enter crop type")
+        }
         let eci =0;
         let ecw =0;
         let ETm =0;
@@ -280,6 +286,54 @@ function Home() {
             </Box>
             );
         }
+        function cald(){
+            if (pa == 0){
+                alert("Please enter crop type")
+            }
+            let Etm=0;
+            if (pa == 1){
+             Etm=1500;
+            }
+            else if ( pa == 2){
+             Etm = 1050;
+         }
+         else if (pa == 3){
+             Etm = 620;
+         }
+         else if (pa == 4){
+             Etm = 1200;
+         }
+         else if (pa ==5 ){
+             Etm = 1250;
+         }
+         else if (pa == 6){
+             Etm = 800;
+         }
+         else if (pa ==7 ){
+             Etm = 320;
+         }
+         else if (pa == 8){
+             Etm =600 ;
+         }
+         else if (pa == 9){
+             Etm = 350;
+         }
+         else if (pa == 10){
+             Etm = 800;
+         }
+         else if (pa ==11 ){
+             Etm = 200;
+         }
+         else if (pa ==12 ){
+             Etm = 600;
+         }
+         d1 = 0.9 * Etm;
+         d2 = 0.8 * Etm;
+         d3 = 0.7 * Etm;
+         setd1(d1)
+         setd2(d2)
+         setd3(d3)
+        }
       const ColoredLine = ({ color }) => (
         <hr
             style={{
@@ -311,7 +365,7 @@ function Home() {
                                 }
                                 options ={crops}
                                 //onChange={opt => console.log(opt.label, opt.value)}
-                                />
+                                 />
                             </p> 
                             <p><form>
                             <label>Cumulative ET:{}{' '}
@@ -378,23 +432,7 @@ function Home() {
                     
                     
                         </div>
-                        <div className='card'>
-                        <div className='drop-image'>
-                            <img src={dollar} />   
-                            <p> Cost</p>
-                        </div>
-                        <div className = "crop_details ">
-                            <p className = "input">
                         
-                            </p> 
-                            <p><form>
-                            <label>Dollars:{' '}
-                            <input type="number" placeholder = "$"/>
-                            </label>
-                        </form></p>
-                        </div>
-                        
-                        </div>
                     </div>
 
                     <div className="sep">
@@ -429,6 +467,18 @@ function Home() {
                             <h4>Irrigation Water depth: {d}</h4>
                         </div>
                     </div> 
+
+                    <div className="r4">
+                        <div className="card">
+                        <h1>Deficit Irrigation</h1>
+                        <button className="gooey-button" onClick = {cald}>Calculate</button>
+                        <Box sx={{ width: '100%' }}>
+                        <h4>For 10%: {d1}</h4>
+                        <h4>For 20%: {d2}</h4>
+                        <h4>For 30%: {d3}</h4>
+                        </Box>
+                        </div>
+                    </div>
                 </div>     
         </div>    
     )
