@@ -91,9 +91,14 @@
 }
 .r4{
     display: flex;
-    margin-top: 15px;
+    margin-top: 25px;
     margin-left: 15%;
     margin-right: 15%;
+}
+.graph{
+    width: 40%;
+    height: 40%;
+    display: inline-block;   
 }
 .sep{
     width: 100%;

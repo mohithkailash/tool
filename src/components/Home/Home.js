@@ -12,6 +12,13 @@ import irrigation from './irrigation.png'
 import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Paper from '@material-ui/core/Paper';
+import {
+  ArgumentAxis,
+  ValueAxis,
+  Chart,
+  BarSeries,
+} from '@devexpress/dx-react-chart-material-ui';
 
 
 const itype = [
@@ -68,9 +75,11 @@ function Home() {
        const [b,setb] = useState('');
        const [c,setc] = useState('');
        const [d,setd] = useState('');
-       let [d1,setd1] = useState('');
-       let [d2,setd2] = useState('');
-       let [d3,setd3] = useState('');
+       let [d1,setd1] = useState(0);
+       let [d2,setd2] = useState(0);
+       let [d3,setd3] = useState(0);
+       let [d4,setd4] = useState(0);
+       let [d5,setd5] = useState(0);
        const [wec,setwec] = useState(null);
        const [Eta,seteta] = useState(0);
        const [ie, setie] = useState(100);
@@ -292,49 +301,67 @@ function Home() {
                 alert("Please enter crop type")
                 return
             }
+            let ky=0;
             let Etm=0;
             if (pa == 1){
+             ky=1;
              Etm=1500;
             }
             else if ( pa == 2){
+             ky = 0.85;
              Etm = 1050;
          }
          else if (pa == 3){
+             ky = 1.05;
              Etm = 620;
          }
          else if (pa == 4){
+             ky = 0.9;
              Etm = 1200;
          }
          else if (pa ==5 ){
+             ky = 0.9;
              Etm = 1250;
          }
          else if (pa == 6){
+             ky = 0.9;
              Etm = 800;
          }
          else if (pa ==7 ){
+             ky = 1.15;
              Etm = 320;
          }
          else if (pa == 8){
+             ky =1.1 ;
              Etm =600 ;
          }
          else if (pa == 9){
+             ky = 1;
              Etm = 350;
          }
          else if (pa == 10){
+             ky =1.1 ;
              Etm = 800;
          }
          else if (pa ==11 ){
+             ky = 1.15;
              Etm = 200;
          }
          else if (pa ==12 ){
+             ky = 1.1;
              Etm = 600;
          }
-         d1 = 0.9 * Etm;
-         d2 = 0.8 * Etm;
-         d3 = 0.7 * Etm;
-         setd1(d1)
-         setd2(d2)
-         setd3(d3)
+         d1 = ky*(1-((0.9 * Etm)/Etm)) ;
+         d2 = ky*(1-((0.8 * Etm)/Etm)) ;
+         d3 = ky*(1-((0.7 * Etm)/Etm)) ;
+         d4 = ky*(1-((0.6 * Etm)/Etm)) ;
+         d5 = ky*(1-((0.5 * Etm)/Etm)) ;
+         setd1((d1*100).toFixed(2))
+         setd2((d2*100).toFixed(2))
+         setd3((d3*100).toFixed(2))
+         setd4((d4*100).toFixed(2))
+         setd5((d5*100).toFixed(2))
+         
         }
       const ColoredLine = ({ color }) => (
         <hr
@@ -345,7 +372,14 @@ function Home() {
             }}
         />
     );
-      
+    let data = [
+        { argument: 'For 10%', value: d1 },
+        { argument: 'For 20%', value: d2 },
+        { argument: 'For 30%', value: d3 },
+        { argument: 'For 40%', value: d4 },
+        { argument: 'For 50%', value: d5 },
+      ];
+    
    
     return (
         <div className = "home">
@@ -370,7 +404,7 @@ function Home() {
                                  />
                             </p> 
                             <p><form>
-                            <label>Cumulative ET:{}{' '}
+                            <label>Actual ET:{}{' '}
                             <div className='bar'> <input type="number" placeholder = "mm" style={{width: "50px"}} onChange = {e => seteta(e.target.value)}/></div>
                             </label>
                             </form></p>
@@ -444,14 +478,14 @@ function Home() {
                     <div className="r2">
                         <div className = "card">
                             <h1> Potential Yield </h1>
-                            <h6>For accurate results, Enter crop type and Cumulative ET</h6>
+                            <h6>For accurate results, Enter crop type and Actual ET</h6>
                             {pa .myPaVal}
                             <button className="gooey-button" onClick = {cpot}>Calculate</button>
                             <h4>{a}</h4>
                         </div>
                         <div className="card">
-                                <h1>Relative Yield</h1>
-                                <h6>For accurate results, Enter crop type and Cumulative ET</h6>
+                                <h1>Yield Reduction</h1>
+                                <h6>For accurate results, Enter crop type and Actual ET</h6>
                                 <button className="gooey-button" onClick = {rpot}>Calculate</button>
                                 <Box sx={{ width: '100%' }}>
                                 <LinearProgressWithLabel className="pb" value={b} />
@@ -462,11 +496,11 @@ function Home() {
                     <div className="r3">
                         <div className = "card">
                             <h1> Leaching Requirements and Irrigation Water Depth </h1>
-                            <h6>For accurate results, Enter crop type, Cumulative ET and Irrigation Efficiency</h6>
+                            <h6>For accurate results, Enter crop type, Actual ET and Irrigation Efficiency</h6>
                             {pa.myPaVal}
                             <button className="gooey-button" onClick = {clr}>Calculate</button>
                             <h4>Leaching Requirement: {c} %</h4>
-                            <h4>Irrigation Water depth: {d}</h4>
+                            <h4>Irrigation Water depth: {d} mm</h4>
                         </div>
                     </div> 
 
@@ -474,11 +508,19 @@ function Home() {
                         <div className="card">
                         <h1>Deficit Irrigation</h1>
                         <button className="gooey-button" onClick = {cald}>Calculate</button>
-                        <Box sx={{ width: '100%' }}>
-                        <h4>For 10%: {d1}</h4>
-                        <h4>For 20%: {d2}</h4>
-                        <h4>For 30%: {d3}</h4>
-                        </Box>
+                        <h6>X-axis: Deficit Irrigation(%), Y-axis: Yield Reduction(%)</h6>
+                        <div className="graph">
+                        <Paper className="graph1">
+                        <Chart
+                            data={data}
+                        >
+                            <ArgumentAxis  />
+                            <ValueAxis />
+                        
+                            <BarSeries valueField="value" argumentField="argument" />
+                            </Chart>
+                        </Paper>
+                        </div>
                         </div>
                     </div>
                 </div>     
